@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="author" content="caijialinxx">
+  <meta name="description" content="CA | A Simple Chat Application Built With Node.js and Websocket">
+  <title>CA Chat</title>
+  <link rel="stylesheet" href="css/style.css">
+  <!-- btn -->
+  <script src="//at.alicdn.com/t/font_604218_kbl2bsjt2rxav2t9.js"></script>
+  <!-- emoji -->
+  <script src="//at.alicdn.com/t/font_606596_4iofyd5c9w94quxr.js"></script>
+  <!-- file -->
+  <script src="//at.alicdn.com/t/font_612308_czjikg4zmukrzfr.js"></script>
+  <style type="text/css">
+    .icon {
+      width: 1em;
+      height: 1em;
+      vertical-align: -0.15em;
+      fill: currentColor;
+      overflow: hidden;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+    <!-- BEGIN background mask -->
+    <div class="background"></div>
+    <!-- END background -->
+    <!-- BEGIN login -->
+    <div id="loginWrapper" class="loginWrapper">
+      <header id="logo" class="logo">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-logo"></use>
+        </svg>
+        <p>CA Chat</p>
+      </header>
+      <div id="nicknameWrapper" class="nicknameWrapper">
+        <div id="info" class="info" class="info">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-warning"></use>
+          </svg>
+          <span></span>
+        </div>
+        <input type="text" id="nicknameInput" class="nicknameInput" maxlength="20" placeholder="Nickname please">
+        <input type="button" value="Enter" id="loginBtn" class="loginBtn">
+        <a href="javascript:void(0)" id="giveName">Give me a name</a>
+      </div>
+    </div>
+    <!-- END login -->
+  
+    <!-- 聊天页面 -->
+    <!-- <div class="mainWrapper"> -->
+      <div id="main" class="main">
+        <div id="alert" class="alert">
+          <div id="closeBtn">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-close"></use>
+            </svg>
+          </div>
+          <div class="info">
+            <span class="friendName"></span>
+            <span class="status"></span>
+          </div>
+          <form class="action">
+            <input type="text" maxlength="30" placeholder="Authentication">
+            <input type="submit" value="Add">
+          </form>
+        </div>
+        <div class="pwdBox">
+          <div id="cancelBtn">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-close"></use>
+            </svg>
+          </div>
+          <div class="intro"></div>
+          <div id="pwd">
+            <input type="text" maxlength="1" id="first">
+            <input type="text" maxlength="1" id="second">
+            <input type="text" maxlength="1" id="third">
+            <input type="text" maxlength="1" id="fourth">
+          </div>
+          <div class="info">Valid duration: <input type="text" id="duration" maxlength="3"> mins.</div>
+          <button id="confirm">Confirm</button>
+        </div>
+        <!-- BEGIN userWrapper -->
+        <div class="userWrapper">
+          <h1 id="userName"></h1>
+          <div id="searchBox" class="searchBox">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-search"></use>
+            </svg>
+            <input type="text" maxlength="20" placeholder="Search for">
+          </div>
+          <div id="joinGroup" class="joinGroup">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-group"></use>
+            </svg>
+            <div class="action">
+              <button id="create">Create</button><button id="join">Join</button>
+            </div>
+          </div>
+          <ul id="usersList" class="usersList">
+            <label for="Robot">
+              <li id="Robot">Robot</li>
+            </label>
+          </ul>
+        </div>
+        <!-- END userWrapper -->
+  
+        <!-- BEGIN chatWrapper -->
+        <div class="chatWrapper">
+          <header class="head"></header>
+          <!-- BEGIN messageBox -->
+          <div class="messageBox"></div>
+          <!-- END messageBox -->
+  
+          <!-- BEGIN controllers -->
+          <div class="controllers">
+            <!-- BEGIN tools -->
+            <div class="toolsWrapper">
+              <div class="emojiWrapper">
+                <label for="emojisBox">
+                  <svg class="icon emoji" aria-hidden="true">
+                    <use xlink:href="#icon-emoji"></use>
+                  </svg>
+                </label>
+                <div id="emojisBox" class="emojisBox">
+                  <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-emoji-01"></use>
+                  </svg><svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-emoji-02"></use>
+                  </svg><svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-emoji-03"></use>
+                  </svg><svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-emoji-04"></use>
+                  </svg><svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-emoji-05"></use>
+                  </svg><svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-emoji-06"></use>
+                  </svg><svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-emoji-07"></use>
+                  </svg><svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-emoji-08"></use>
+                  </svg><svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-emoji-09"></use>
+                  </svg><svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-emoji-10"></use>
+                  </svg><svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-emoji-11"></use>
+                  </svg><svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-emoji-12"></use>
+                  </svg><svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-emoji-13"></use>
+                  </svg><svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-emoji-14"></use>
+                  </svg><svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-emoji-15"></use>
+                  </svg><svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-emoji-16"></use>
+                  </svg><svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-emoji-17"></use>
+                  </svg><svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-emoji-18"></use>
+                  </svg><svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-emoji-19"></use>
+                  </svg><svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-emoji-20"></use>
+                  </svg><svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-emoji-21"></use>
+                  </svg><svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-emoji-22"></use>
+                  </svg><svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-emoji-23"></use>
+                  </svg><svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-emoji-24"></use>
+                  </svg><svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-emoji-25"></use>
+                  </svg><svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-emoji-26"></use>
+                  </svg><svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-emoji-27"></use>
+                  </svg><svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-emoji-28"></use>
+                  </svg><svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-emoji-29"></use>
+                  </svg><svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-emoji-30"></use>
+                  </svg>
+                </div>
+              </div>
+              <div class="colorWrapper">
+                <label for="changeColor">
+                  <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-textcolor"></use>
+                  </svg>
+                </label>
+                <input type="color" id="changeColor" class="changeColor" title="Font Color">
+              </div>
+              <div class="fileWrapper">
+                <label for="sendFile" class="fileLable">
+                  <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-doc"></use>
+                  </svg>
+                </label>
+                <input type="file" id="sendFile" class="sendFile" multiple/>
+              </div>
+            </div>
+            <!-- END tools -->
+  
+            <!-- BEGIN editArea -->
+            <div class="editWrapper">
+              <pre class="editArea" contenteditable="true"></pre>
+            </div>
+            <!-- END editArea -->
+  
+            <div class="sendWrapper">
+              <span>Ctrl + Enter 换行</span><input type="button" value="SEND" class="sendBtn">
+            </div>
+          </div>
+          <!-- END controller -->
+        </div>
+        <!-- END chatWrapper -->
+      </div>
+      <!-- END main -->
+    <!-- </div> -->
+  
+    <footer>created by <a href=''>Caijialinxx</a> | <a href=''>React</a></footer>
+  </div>
+  
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="js/main.js"></script>
+  <script src="//code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <span id="getIP" style="display:none;"></span>
+  <script src="//pv.sohu.com/cityjson?ie=utf-8"></script>
+  <script type="text/javascript">
+    getIP.textContent = returnCitySN["cname"].substring(returnCitySN["cname"].indexOf('省')+1)
+  </script>
+  <script>
+    window.onbeforeunload = function (e) {
+      return 'Sure to leave? You will lose your data!';
+    }
+    window.onunload = function(e){
+      sessionStorage.clear();
+    }
+  </script>
+</body>
+
+</html>
